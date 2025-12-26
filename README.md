@@ -1,2 +1,2 @@
-# playwright-python-boilerplate
-Some boilerplate for playwright python approach
+# Playwright-python
+Just some boiler plate code to jump start with playwright python testing

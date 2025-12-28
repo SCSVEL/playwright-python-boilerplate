@@ -7,9 +7,9 @@ import pytest
 from playwright.sync_api import Page
 from playwright.sync_api import Playwright
 
-from pages.acctPg import AcctPg
 from pages.homePg import HomePg
 from pages.loginPg import LoginPg
+from pages.acctPg import AcctPg
 from utils.reporter import Reporter
 
 

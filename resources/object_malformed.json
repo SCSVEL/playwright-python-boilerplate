@@ -1,0 +1,2 @@
+{ "id": "bad" , "name": "Broken Object", "data": { "a": 1 }  
+  /* missing closing brace and invalid comment style */

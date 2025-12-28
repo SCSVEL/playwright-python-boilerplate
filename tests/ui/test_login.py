@@ -8,6 +8,7 @@ from utils.reporter import Reporter
 from utils.utils import Utils
 
 @pytest.mark.skip(reason="Just testing others")
+@pytest.mark.ui
 def test_check_if_logged_in(my_page: Page, app_pages):
     try:
         print("URL - " + Utils.get_env("APP_URL"))
@@ -20,6 +21,7 @@ def test_check_if_logged_in(my_page: Page, app_pages):
         raise e
 
 @pytest.mark.skip(reason="Just testing others")
+@pytest.mark.ui
 def test_acct_pg(my_page: Page, app_pages):
     try:
         # Login
@@ -38,6 +40,7 @@ def test_acct_pg(my_page: Page, app_pages):
         raise e
 
 @pytest.mark.skip(reason="Just testing others")
+@pytest.mark.ui
 def test_reporting(my_page: Page, reporter: Reporter, app_pages):
     try:
         reporter.report_info("my first step")

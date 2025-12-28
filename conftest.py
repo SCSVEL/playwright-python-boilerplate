@@ -22,13 +22,14 @@ def load_env_data():
     else:
         dotenv.load_dotenv("../envconfig/" + args.whichenv + ".env")
 
-@pytest.mark.ui
+
 @pytest.fixture(scope="session", autouse=True)
-def bfr_session(playwright: Playwright):
+def bfr_session(playwright: Playwright, request):
     # Load the env vars
     load_env_data()
 
-    if playwright.node.get_closest_marker("api") is None:
+    # If the current test isn't marked as UI, skip this browser setup
+    if request.node.get_closest_marker("api") is None:
         pytest.skip("skipping bfr_session fixture as not a UI test")
 
     # Get the browser

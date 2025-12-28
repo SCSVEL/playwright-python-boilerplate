@@ -1,6 +1,4 @@
 from playwright.sync_api import Page, expect
-from dotenv import load_dotenv
-import os
 from pages.basePg import BasePg
 from utils.reporter import Reporter
 from utils.utils import Utils

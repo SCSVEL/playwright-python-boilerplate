@@ -1,13 +1,14 @@
 import json
 from pathlib import Path
-
+import pytest
 from utils.api_utils import compare_json
 
 
 # resources moved to repository root
-RES = Path(__file__).resolve().parent.parent / "resources"
+RES = Path(__file__).resolve().parent.parent.parent / "resources"
 
 
+@pytest.mark.api
 def test_compare_missing_field_reports_missing_key():
     expected = json.load((RES / "object_1.json").open("r", encoding="utf-8"))
     actual = json.load((RES / "object_missing_fields.json").open("r", encoding="utf-8"))
@@ -17,6 +18,7 @@ def test_compare_missing_field_reports_missing_key():
     assert any("Missing key" in d or "Missing key in actual" in d or "Missing key" in d for d in diffs)
 
 
+@pytest.mark.api
 def test_compare_extra_field_reports_unexpected_key():
     expected = json.load((RES / "object_1.json").open("r", encoding="utf-8"))
     actual = json.load((RES / "object_extra_field.json").open("r", encoding="utf-8"))
@@ -26,6 +28,7 @@ def test_compare_extra_field_reports_unexpected_key():
     assert any("Unexpected key" in d for d in diffs)
 
 
+@pytest.mark.api
 def test_malformed_json_raises_decode_error():
     path = RES / "object_malformed.json"
     try:
@@ -34,4 +37,4 @@ def test_malformed_json_raises_decode_error():
     except json.JSONDecodeError:
         # expected
         return
-    raise AssertionError("Expected JSONDecodeError when reading malformed fixture")
+    raise AssertionError("Expected JSONDecodeError when reading malformed mock JSON")

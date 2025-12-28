@@ -24,34 +24,38 @@ def load_env_data():
 
 
 @pytest.fixture(scope="session", autouse=True)
-def bfr_session(playwright: Playwright, request):
+def bfr_session(request):
     # Load the env vars
     load_env_data()
 
-    # If the current test isn't marked as UI, skip this browser setup
-    if request.node.get_closest_marker("api") is None:
-        pytest.skip("skipping bfr_session fixture as not a UI test")
 
+
+@pytest.fixture(scope="session", autouse=True)
+def bfr_session(playwright: Playwright):    
+    # If the current test isn't marked as UI, skip this browser setup 
+    # ToDo: Update to skip for API tests only        
+    
     # Get the browser
-    if environ.get("USE_EXISTING_BROWSER") in (None, 'Yes', 'YES', True):
-        browser = playwright.chromium.connect_over_cdp("http://localhost:9222")
-        context = browser.contexts[0]
-        page = browser.contexts[0].pages[0]
+    # if environ.get("USE_EXISTING_BROWSER") in (None, 'Yes', 'YES', True):
+    #     browser = playwright.chromium.connect_over_cdp("http://localhost:9222")
+    #     context = browser.contexts[0]
+    #     page = browser.contexts[0].pages[0]
 
-        if len(browser.contexts[0].pages) > 1:
-            if browser.contexts[0].pages[0].url.startswith("devtools"):
-                page = browser.contexts[0].pages[1]
-    else:
-        browser = playwright.chromium.launch(headless=False, slow_mo=60_000, args=[])  # "--start-maximized"
-        context = browser.new_context(no_viewport=True)
-        page = context.new_page()
+    #     if len(browser.contexts[0].pages) > 1:
+    #         if browser.contexts[0].pages[0].url.startswith("devtools"):
+    #             page = browser.contexts[0].pages[1]
+    # else:
+    #     browser = playwright.chromium.launch(headless=False, slow_mo=60_000, args=[])  # "--start-maximized"
+    #     context = browser.new_context(no_viewport=True)
+    #     page = context.new_page()
 
-    yield page
+    # yield page
+    yield None
 
-    if environ.get("USE_EXISTING_BROWSER") in ('No', 'NO', False):
-        page.close()
-        context.close()
-        browser.close()
+    # if environ.get("USE_EXISTING_BROWSER") in ('No', 'NO', False):
+    #     page.close()
+    #     context.close()
+    #     browser.close()
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -65,15 +69,16 @@ def reporter(my_page: Page):
     curr_test_name = curr_test_name.split("::")[1].split(" ")[0].strip()
     reporter = Reporter(curr_test_name, my_page)
     yield reporter
-    reporter.save()
+    # reporter.save()
 
 
 @pytest.fixture
 def app_pages(my_page: Page, reporter: Reporter):
-    my_pages = {
-        "home_pg": HomePg(my_page, reporter),
-        "login_pg": LoginPg(my_page, reporter),
-        "acct_pg": AcctPg(my_page, reporter)
-    }
-    return my_pages
+    # my_pages = {
+    #     "home_pg": HomePg(my_page, reporter),
+    #     "login_pg": LoginPg(my_page, reporter),
+    #     "acct_pg": AcctPg(my_page, reporter)
+    # }
+    # return my_pages
+    return {}
 

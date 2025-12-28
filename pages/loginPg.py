@@ -1,7 +1,7 @@
 from playwright.sync_api import Page, expect
 from .basePg import BasePg
-from ..utils.reporter import Reporter
-from ..utils.utils import Utils
+from utils.reporter import Reporter
+from utils.utils import Utils
 
 
 class LoginPg(BasePg):

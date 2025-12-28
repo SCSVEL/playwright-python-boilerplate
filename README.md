@@ -1,4 +1,4 @@
-# Python AUI/API testing Boilerplate
+# Python UI/API testing Boilerplate
 
 This is a minimal Python project skeleton for UI and API testing with Playwright and pytest.
 

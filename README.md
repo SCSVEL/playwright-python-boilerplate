@@ -1,3 +1,6 @@
+[![CI](https://github.com/SCSVEL/playwright-python-boilerplate/actions/workflows/ci.yml/badge.svg)](https://github.com/SCSVEL/playwright-python-boilerplate/actions/workflows/ci.yml)
+
+
 # Python UI/API testing Boilerplate
 
 This is a minimal Python project skeleton for UI and API testing with Playwright and pytest.

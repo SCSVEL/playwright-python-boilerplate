@@ -33,7 +33,7 @@ class Reporter:
             "desc": desc,
             "status": status,
             "time": datetime.now().strftime("%H:%M:%S"),
-            "screenshot_path": screenshot_path
+            "screenshot_path": screenshot_path if self.page else None
         })
 
     def _encode_image_to_base64(self, path):

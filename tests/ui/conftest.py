@@ -57,4 +57,4 @@ def reporter(my_page):
     curr_test_name = curr_test_name.split("::")[1].split(" ")[0].strip()
     reporter = Reporter(curr_test_name, my_page)
     yield reporter
-    # reporter.save()
+    reporter.save()

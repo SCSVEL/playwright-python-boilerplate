@@ -15,4 +15,4 @@ def reporter():
     curr_test_name = curr_test_name.split("::")[1].split(" ")[0].strip()
     reporter = Reporter(curr_test_name, None)
     yield reporter
-    # reporter.save()
+    reporter.save()

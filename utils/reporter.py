@@ -1,3 +1,4 @@
+import os
 import base64
 from datetime import datetime
 from os import environ
@@ -160,6 +161,11 @@ class Reporter:
         return html
 
     def save(self):
+        # Create reports directory if it doesn't exist
+        os.makedirs(os.path.dirname(self.output_file), exist_ok=True)
+
+        # Write the HTML report to file
         with open(self.output_file, "w") as file:
             file.write(self._generate_html())
+            
         print(f"✅ HTML report saved as: {self.output_file}")
